@@ -77,7 +77,7 @@ This repository contains the instructions, requirements, and starter code for St
    - The **URL** to your published website
    - The **link** to your GitHub repository  
      …via the Google Form linked in your email.
-5. Complete the video questions via the Hireflix platform
+5. Complete the video questions via the loom platform
 
 ---
 
