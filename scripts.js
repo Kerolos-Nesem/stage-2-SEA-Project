@@ -112,11 +112,6 @@ function editCardContent(card, newImageURL) {
   
   cardImage.src = newImageURL;
   cardImage.alt = " Pokemon Card Image";
-
-  // You can use console.log to help you debug!
-  // View the output by right clicking on your website,
-  // select "Inspect", then click on the "Console" tab
-  //console.log("- html: ", card);
 }
 
 //Buttons
@@ -135,7 +130,7 @@ function removeLastCard() {
 
 
 //Sorting pokemons by: Cost, Name
-function sortCardByCost(){
+function sortCards(){
     const value = this.value;
     
     if (value === "name-asc") {
@@ -176,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   showCards();  
   
-  document.getElementById("sort-select").addEventListener("change", sortCardByCost);
+  document.getElementById("sort-select").addEventListener("change", sortCards);
   
   document.getElementById("search-input").addEventListener("keydown", (event) =>{
   
