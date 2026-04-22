@@ -1,25 +1,29 @@
 <!doctype html>
 <html>
   <head>
-    <title>LA TV Shows | Home</title>
+    <title>Personal Pokemon Cards Collection</title>
     <meta name="description" content="A Catalog of Shows Set in Los Angeles" />
     <link rel="stylesheet" href="style.css" />
-    <script type="text/javascript" src="scripts.js"></script>
+    <script type="text/javascript" src="scripts.js" defer></script>
   </head>
 
   <body>
     <header class="main-header">
-      <h1 class="title">LA TV Shows</h1>
+      <h1 class="title">Pokemon Cards I Own</h1>
     </header>
+    <input class = 'funcs' type="text" id="search-input" placeholder="Search by name" />
+   <select class = 'funcs' id="sort-select">
+     <option value="default">Sort By...</option>
+     <option value="name-asc">Name (A-Z)</option>
+     <option value="name-desc">Name (Z-A)</option>
+     <option value="cost-asc">Cost (Low to High)</option>
+     <option value="cost-desc">Cost (High to Low)</option>
+  </select>
     <div id="card-container"></div>
     <div class="card" style="display: none">
       <div class="card-content">
-        <h2>TV Show Title</h2>
-        <img src="" alt="TV Show Poster" />
-        <ul>
-          <li>Bullet Point 1</li>
-          <li>Bullet Point 2</li>
-          <li>Bullet Point 3</li>
+        <img src="" alt="Pokemon card" />
+        <ul id="card-info">
         </ul>
       </div>
     </div>

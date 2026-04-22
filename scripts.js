@@ -23,75 +23,149 @@
  *
  */
 
-const FRESH_PRINCE_URL =
-  "https://upload.wikimedia.org/wikipedia/en/3/33/Fresh_Prince_S1_DVD.jpg";
-const CURB_POSTER_URL =
-  "https://m.media-amazon.com/images/M/MV5BZDY1ZGM4OGItMWMyNS00MDAyLWE2Y2MtZTFhMTU0MGI5ZDFlXkEyXkFqcGdeQXVyMDc5ODIzMw@@._V1_FMjpg_UX1000_.jpg";
-const EAST_LOS_HIGH_POSTER_URL =
-  "https://static.wikia.nocookie.net/hulu/images/6/64/East_Los_High.jpg";
 
-// This is an array of strings (TV show titles)
-let titles = [
-  "Fresh Prince of Bel Air",
-  "Curb Your Enthusiasm",
-  "East Los High",
+
+// This is an array of objects (Cards)
+let pokemons = [{
+  name: "Team Rocket's Mewtwo EX",
+  type: "Psychic",
+  cost: 58.36,
+  url: "https://tcgplayer-cdn.tcgplayer.com/product/633040_in_1000x1000.jpg",
+},{
+  name:"Mega Charizard X EX",
+  type: "Fire",
+  cost: 44.71,
+  url: "https://tcgplayer-cdn.tcgplayer.com/product/659612_in_1000x1000.jpg",
+
+},{
+  name: "Reshiram & Zekrom GX",
+  type: "Fire & Lightning",
+  cost: 78.75,
+  url: "https://tcgplayer-cdn.tcgplayer.com/product/201205_in_1000x1000.jpg",
+},{
+
+  name: "Ninetales",
+  type: "Fire",
+  cost: 43.21,
+  url: "https://tcgplayer-cdn.tcgplayer.com/product/509945_in_1000x1000.jpg",
+},{
+  name: "Charizard",
+  type: "Fire & Flying",
+  cost: 24.12,
+  url: "https://tcgplayer-cdn.tcgplayer.com/product/284251_in_1000x1000.jpg",
+},{
+  name: "Moltres & Zapdos & Articuno GX",
+  type: "Fire & Lightning & Ice",
+  cost: 46.50,
+  url: "https://tcgplayer-cdn.tcgplayer.com/product/197688_in_1000x1000.jpg",
+},{
+  name: "Arceus & Dialga & Palkia GX",
+  type: "Normal & Dragon & Steel",
+  cost: 28.21,
+  url: "https://tcgplayer-cdn.tcgplayer.com/product/201204_in_1000x1000.jpg",
+},{
+  name: "Vulpix",
+  type: "Fire",
+  cost: 14.99,
+  url: "https://tcgplayer-cdn.tcgplayer.com/product/654477_in_1000x1000.jpg",
+}
 ];
+
 // Your final submission should have much more data than this, and
 // you should use more than just an array of strings to store it all.
 
+
 // This function adds cards the page to display the data in the array
-function showCards() {
+function showCards(list = pokemons) {
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
   const templateCard = document.querySelector(".card");
-
-  for (let i = 0; i < titles.length; i++) {
-    let title = titles[i];
-
-    // This part of the code doesn't scale very well! After you add your
-    // own data, you'll need to do something totally different here.
-    let imageURL = "";
-    if (i == 0) {
-      imageURL = FRESH_PRINCE_URL;
-    } else if (i == 1) {
-      imageURL = CURB_POSTER_URL;
-    } else if (i == 2) {
-      imageURL = EAST_LOS_HIGH_POSTER_URL;
-    }
-
+  
+  for (let i = 0; i < list.length; i++) {
+    
     const nextCard = templateCard.cloneNode(true); // Copy the template card
-    editCardContent(nextCard, title, imageURL); // Edit title and image
+    const cardInfo = nextCard.querySelector(".card-content"); // Get the content area of the card
+    cardInfo.removeAttribute("id"); // Remove id to avoid duplicates    
+
+
+    list.innerHTML =`
+    <li>
+    <strong>${list[i].name}</strong> <br>
+    Type: ${list[i].type} <br> 
+    Cost: $${list[i].cost}
+    </li> `;
+    
+    
+    editCardContent(nextCard, list[i].url); // Edit image
     cardContainer.appendChild(nextCard); // Add new card to the container
   }
 }
 
-function editCardContent(card, newTitle, newImageURL) {
+function editCardContent(card, newImageURL) {
   card.style.display = "block";
-
-  const cardHeader = card.querySelector("h2");
-  cardHeader.textContent = newTitle;
 
   const cardImage = card.querySelector("img");
   cardImage.src = newImageURL;
-  cardImage.alt = newTitle + " Poster";
+  cardImage.alt = " Pokemon Card Image";
 
   // You can use console.log to help you debug!
   // View the output by right clicking on your website,
   // select "Inspect", then click on the "Console" tab
-  console.log("new card:", newTitle, "- html: ", card);
+  console.log("- html: ", card);
 }
 
 // This calls the addCards() function when the page is first loaded
-document.addEventListener("DOMContentLoaded", showCards);
 
 function quoteAlert() {
   console.log("Button Clicked!");
   alert(
-    "I guess I can kiss heaven goodbye, because it got to be a sin to look this good!",
+    "I wanna be the very best, like no one ever was!",
   );
 }
 
 function removeLastCard() {
-  titles.pop(); // Remove last item in titles array
+  pokemons.pop(); // Remove last item in titles array
   showCards(); // Call showCards again to refresh
 }
+
+
+//Sorting pokemons by: Cost, Name
+
+function sortCardByCost(){
+    const value = this.value;
+    
+    if (value === "name-asc") {
+      pokemons.sort((a, b) => a.name.localeCompare(b.name)); // Sort by name A-Z
+    } else if (value === "name-desc") { 
+      pokemons.sort((a, b) => b.name.localeCompare(a.name)); // Sort by name Z-A  
+    } else if (value === "cost-asc") {
+      pokemons.sort((a, b) => a.cost - b.cost); // Sort by cost low to high 
+    } else{
+      pokemons.sort((a, b) => b.cost - a.cost); // Sort by cost high to low
+    }
+
+    showCards(); 
+}
+
+
+//Searching for pokemons by: Name, Type
+
+function searchByName(name) {
+  const searchResults = pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(name.toLowerCase()));
+  //console.log(searchResults);
+  showCards(searchResults);
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  showCards();  
+  
+  document.getElementById("sort-select").addEventListener("change", sortCardByCost);
+  
+  document.getElementById("search-input").addEventListener("keydown", (event) =>{
+    if (event.key === "Enter") {
+      searchByName(event.target.value);
+    }
+  });
+
+});
