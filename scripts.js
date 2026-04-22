@@ -80,24 +80,23 @@ function showCards(list = pokemons) {
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
   const templateCard = document.querySelector(".card");
-  
+
   for (let i = 0; i < list.length; i++) {
-    
-    const nextCard = templateCard.cloneNode(true); // Copy the template card
-    const cardInfo = nextCard.querySelector(".card-content"); // Get the content area of the card
-    cardInfo.removeAttribute("id"); // Remove id to avoid duplicates    
+    const nextCard = templateCard.cloneNode(true);
+    nextCard.style.display = "block";
 
+    const cardImage = nextCard.querySelector("img");
+    cardImage.src = list[i].url;
+    cardImage.alt = list[i].name;
 
-    list.innerHTML =`
-    <li>
-    <strong>${list[i].name}</strong> <br>
-    Type: ${list[i].type} <br> 
-    Cost: $${list[i].cost}
-    </li> `;
-    
-    
-    editCardContent(nextCard, list[i].url); // Edit image
-    cardContainer.appendChild(nextCard); // Add new card to the container
+    const cardInfo = nextCard.querySelector("ul");
+    cardInfo.innerHTML = `
+      <li><strong>${list[i].name}</strong></li>
+      <li>Type: ${list[i].type}</li>
+      <li>Cost: $${list[i].cost}</li>
+    `;
+
+    cardContainer.appendChild(nextCard);
   }
 }
 

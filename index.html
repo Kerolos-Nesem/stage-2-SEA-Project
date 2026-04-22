@@ -11,14 +11,16 @@
     <header class="main-header">
       <h1 class="title">Pokemon Cards I Own</h1>
     </header>
-    <input class = 'funcs' type="text" id="search-input" placeholder="Search by name" />
-   <select class = 'funcs' id="sort-select">
-     <option value="default">Sort By...</option>
-     <option value="name-asc">Name (A-Z)</option>
-     <option value="name-desc">Name (Z-A)</option>
-     <option value="cost-asc">Cost (Low to High)</option>
-     <option value="cost-desc">Cost (High to Low)</option>
-  </select>
+    <div class="funcs">
+      <input class = 'funcs' type="text" id="search-input" placeholder="Search by name" />
+      <select class = 'funcs' id="sort-select">
+        <option value="default">Sort By...</option>
+        <option value="name-asc">Name (A-Z)</option>
+        <option value="name-desc">Name (Z-A)</option>
+        <option value="cost-asc">Cost (Low to High)</option>
+        <option value="cost-desc">Cost (High to Low)</option>
+      </select>
+    </div>
     <div id="card-container"></div>
     <div class="card" style="display: none">
       <div class="card-content">
