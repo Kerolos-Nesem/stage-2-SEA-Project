@@ -77,11 +77,14 @@ let pokemons = [{
 
 // This function adds cards the page to display the data in the array
 function showCards(list = pokemons) {
+
   const cardContainer = document.getElementById("card-container");
+  
   cardContainer.innerHTML = "";
   const templateCard = document.querySelector(".card");
 
   for (let i = 0; i < list.length; i++) {
+  
     const nextCard = templateCard.cloneNode(true);
     nextCard.style.display = "block";
 
@@ -89,6 +92,7 @@ function showCards(list = pokemons) {
     cardImage.src = list[i].url;
     cardImage.alt = list[i].name;
 
+    //Card info
     const cardInfo = nextCard.querySelector("ul");
     cardInfo.innerHTML = `
       <li><strong>${list[i].name}</strong></li>
@@ -96,6 +100,7 @@ function showCards(list = pokemons) {
       <li>Cost: $${list[i].cost}</li>
     `;
 
+    
     cardContainer.appendChild(nextCard);
   }
 }
@@ -104,23 +109,24 @@ function editCardContent(card, newImageURL) {
   card.style.display = "block";
 
   const cardImage = card.querySelector("img");
+  
   cardImage.src = newImageURL;
   cardImage.alt = " Pokemon Card Image";
 
   // You can use console.log to help you debug!
   // View the output by right clicking on your website,
   // select "Inspect", then click on the "Console" tab
-  console.log("- html: ", card);
+  //console.log("- html: ", card);
 }
 
-// This calls the addCards() function when the page is first loaded
-
+//Buttons
 function quoteAlert() {
   console.log("Button Clicked!");
   alert(
     "I wanna be the very best, like no one ever was!",
   );
 }
+
 
 function removeLastCard() {
   pokemons.pop(); // Remove last item in titles array
@@ -129,18 +135,25 @@ function removeLastCard() {
 
 
 //Sorting pokemons by: Cost, Name
-
 function sortCardByCost(){
     const value = this.value;
     
     if (value === "name-asc") {
+  
       pokemons.sort((a, b) => a.name.localeCompare(b.name)); // Sort by name A-Z
+  
     } else if (value === "name-desc") { 
+  
       pokemons.sort((a, b) => b.name.localeCompare(a.name)); // Sort by name Z-A  
+  
     } else if (value === "cost-asc") {
+  
       pokemons.sort((a, b) => a.cost - b.cost); // Sort by cost low to high 
+  
     } else{
+  
       pokemons.sort((a, b) => b.cost - a.cost); // Sort by cost high to low
+  
     }
 
     showCards(); 
@@ -150,21 +163,29 @@ function sortCardByCost(){
 //Searching for pokemons by: Name, Type
 
 function searchByName(name) {
+  
   const searchResults = pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(name.toLowerCase()));
+  
   //console.log(searchResults);
+
   showCards(searchResults);
 }
 
 
 document.addEventListener("DOMContentLoaded", () => {
+  
   showCards();  
   
   document.getElementById("sort-select").addEventListener("change", sortCardByCost);
   
   document.getElementById("search-input").addEventListener("keydown", (event) =>{
+  
     if (event.key === "Enter") {
+  
       searchByName(event.target.value);
+  
     }
+  
   });
 
 });
